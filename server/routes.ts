@@ -5,6 +5,13 @@ import { insertUserSchema, insertProductSchema, insertContactSchema } from "@sha
 import bcrypt from "bcryptjs";
 import session from "express-session";
 
+// Extend session data type
+declare module 'express-session' {
+  interface SessionData {
+    userId: number;
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Session setup
   app.use(session({

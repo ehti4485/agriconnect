@@ -47,15 +47,15 @@ export function Navbar() {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white dark:bg-black shadow-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-agro-green rounded-lg p-2">
+            <div className="bg-green-500 rounded-lg p-2">
               <div className="w-6 h-6 text-white flex items-center justify-center">🌱</div>
             </div>
-            <span className="text-xl font-bold agro-dark">AgroMarket</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">AgroMarket</span>
           </Link>
 
           {/* Navigation - Desktop */}
@@ -63,7 +63,7 @@ export function Navbar() {
             <Link href="/">
               <Button
                 variant={isActive("/") ? "default" : "ghost"}
-                className={isActive("/") ? "bg-agro-green hover:bg-green-600" : ""}
+                className={isActive("/") ? "bg-green-500 hover:bg-green-600 text-white" : "text-gray-700 dark:text-gray-200"}
               >
                 <Home className="w-4 h-4 mr-2" />
                 Home
@@ -74,7 +74,7 @@ export function Navbar() {
                 <Link href="/add-product">
                   <Button
                     variant={isActive("/add-product") ? "default" : "ghost"}
-                    className={isActive("/add-product") ? "bg-agro-green hover:bg-green-600" : ""}
+                    className={isActive("/add-product") ? "bg-green-500 hover:bg-green-600 text-white" : "text-gray-700 dark:text-gray-200"}
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Sell
@@ -83,7 +83,7 @@ export function Navbar() {
                 <Link href="/profile">
                   <Button
                     variant={isActive("/profile") ? "default" : "ghost"}
-                    className={isActive("/profile") ? "bg-agro-green hover:bg-green-600" : ""}
+                    className={isActive("/profile") ? "bg-green-500 hover:bg-green-600 text-white" : "text-gray-700 dark:text-gray-200"}
                   >
                     <User className="w-4 h-4 mr-2" />
                     Profile
@@ -99,7 +99,7 @@ export function Navbar() {
             <Button
               variant="outline"
               size="icon"
-              className="bg-agro-blue hover:bg-blue-600 text-white border-0"
+              className="bg-blue-500 hover:bg-blue-600 text-white border-0"
               onClick={() => {
                 toast({
                   title: "Voice Command",
@@ -114,7 +114,7 @@ export function Navbar() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="hidden md:flex">
+                  <Button variant="outline" className="hidden md:flex text-gray-700 dark:text-gray-200">
                     <User className="w-4 h-4 mr-2" />
                     {user.firstName} {user.lastName}
                   </Button>
@@ -138,13 +138,13 @@ export function Navbar() {
             ) : (
               <div className="hidden md:flex space-x-2">
                 <Link href="/register">
-                  <Button variant="outline">Register</Button>
+                  <Button variant="outline" className="text-gray-700 dark:text-gray-200">Register</Button>
                 </Link>
               </div>
             )}
 
             {/* Mobile Menu Button */}
-            <Button variant="outline" size="icon" className="md:hidden">
+            <Button variant="outline" size="icon" className="md:hidden text-gray-700 dark:text-gray-200">
               <Menu className="w-4 h-4" />
             </Button>
           </div>

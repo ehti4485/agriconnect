@@ -44,6 +44,102 @@ export class MemStorage implements IStorage {
     this.currentUserId = 1;
     this.currentProductId = 1;
     this.currentContactId = 1;
+    
+    // Add sample data for demonstration
+    this.initializeSampleData();
+  }
+
+  private async initializeSampleData() {
+    // Sample users
+    const sampleUsers = [
+      {
+        username: "ali_farmer",
+        email: "ali@example.com",
+        password: "hashedpassword123",
+        role: "farmer" as const,
+        firstName: "Ali",
+        lastName: "Ahmed",
+        phone: "+92 300 1234567",
+        location: "Lahore, Punjab",
+        profileImageUrl: null
+      },
+      {
+        username: "fatima_trader",
+        email: "fatima@example.com", 
+        password: "hashedpassword456",
+        role: "trader" as const,
+        firstName: "Fatima",
+        lastName: "Khan",
+        phone: "+92 333 9876543",
+        location: "Karachi, Sindh",
+        profileImageUrl: null
+      }
+    ];
+
+    for (const userData of sampleUsers) {
+      const id = this.currentUserId++;
+      const user: User = {
+        ...userData,
+        id,
+        createdAt: new Date()
+      };
+      this.users.set(id, user);
+    }
+
+    // Sample products
+    const sampleProducts = [
+      {
+        sellerId: 1,
+        title: "Premium Basmati Rice",
+        description: "High-quality basmati rice, freshly harvested from our organic farm. Perfect for daily cooking and special occasions.",
+        price: "85",
+        quantity: "500kg",
+        category: "grains" as const,
+        location: "Lahore, Punjab",
+        imageUrl: null
+      },
+      {
+        sellerId: 1,
+        title: "Fresh Tomatoes",
+        description: "Vine-ripened tomatoes, grown without pesticides. Rich in vitamins and perfect for cooking.",
+        price: "120",
+        quantity: "200kg",
+        category: "vegetables" as const,
+        location: "Lahore, Punjab", 
+        imageUrl: null
+      },
+      {
+        sellerId: 2,
+        title: "Sweet Mangoes",
+        description: "Delicious Chaunsa mangoes, hand-picked at perfect ripeness. Sweet and juicy.",
+        price: "180",
+        quantity: "100kg",
+        category: "fruits" as const,
+        location: "Karachi, Sindh",
+        imageUrl: null
+      },
+      {
+        sellerId: 1,
+        title: "Wheat Flour",
+        description: "Stone-ground wheat flour from our own wheat harvest. Perfect for making fresh bread and chapati.",
+        price: "65",
+        quantity: "1000kg",
+        category: "grains" as const,
+        location: "Lahore, Punjab",
+        imageUrl: null
+      }
+    ];
+
+    for (const productData of sampleProducts) {
+      const id = this.currentProductId++;
+      const product: Product = {
+        ...productData,
+        id,
+        isActive: true,
+        createdAt: new Date()
+      };
+      this.products.set(id, product);
+    }
   }
 
   async getUser(id: number): Promise<User | undefined> {
@@ -67,6 +163,7 @@ export class MemStorage implements IStorage {
     const user: User = { 
       ...insertUser, 
       id,
+      profileImageUrl: insertUser.profileImageUrl || null,
       createdAt: new Date()
     };
     this.users.set(id, user);
@@ -141,6 +238,7 @@ export class MemStorage implements IStorage {
       ...insertProduct,
       id,
       sellerId,
+      imageUrl: insertProduct.imageUrl || null,
       isActive: true,
       createdAt: new Date()
     };
